@@ -938,6 +938,12 @@ impl<W: Write + Seek> Writer<W> {
         Ok(())
     }
 
+    /// Sets the compression algorithm used for subsequently opened chunks.
+    /// Has no effect on any currently open chunk.
+    pub fn set_chunk_compression(&mut self, compression: Option<Compression>) {
+        self.options.compression = compression;
+    }
+
     const WRITER_IS_NONE: &'static str = "unreachable: self.writer should never be None";
 
     fn assert_not_finished(&self) {
